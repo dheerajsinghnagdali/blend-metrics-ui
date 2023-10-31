@@ -1,6 +1,6 @@
 {
   "name": "@blend-metrics/ui",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Blend Metrics' essential components",
   "author": "Dheeraj Singh Nagdali <dheerajsinghnagdali@gmail.com>",
   "license": "MIT",
@@ -53,7 +53,7 @@
     "tooling": "concurrently \"npm:lint:check\" \"npm:format:check\"",
     "build:build": "rimraf ./dist && tsup",
     "build": "npm run tooling && npm run build:build && npm:types:check",
-    "version": "npx changeset version",
+    "version": "changeset version",
     "release": "npm run build && changeset publish"
   },
   "dependencies": {
