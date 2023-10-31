@@ -1,20 +1,14 @@
 name: "Chromatic"
 
-on:
-  push:
-    branches:
-      - "main"
+on: push
 
 jobs:
   chromatic-deployment:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-        with:
-          node-version: "18.x"
-      - run: npm install -g npm
-      - run: npm ci
+      - uses: actions/checkout@v1
+      - name: Install dependencies
+        run: yarn
       - name: Publish to Chromatic
         uses: chromaui/action@v1
         with:
