@@ -9,5 +9,12 @@ export default defineConfig({
     "react-utils": "lib/react-utils.ts"
   },
   dts: true,
-  format: ["cjs", "esm"]
+  format: ["cjs", "esm"],
+  treeshake: true,
+  sourcemap: "inline",
+  minify: true,
+  clean: true,
+  splitting: false,
+  external: ["react"],
+  injectStyle: false
 });

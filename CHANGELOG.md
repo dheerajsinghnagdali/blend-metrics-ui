@@ -1,5 +1,11 @@
 # @blend-metrics/ui
 
+## 0.0.2
+
+### Patch Changes
+
+- Fix tsup config
+
 ## 0.0.1
 
 ### Patch Changes

@@ -115,7 +115,6 @@ const config: Config = {
     require("@tailwindcss/forms"),
     require("@headlessui/tailwindcss"),
     require("tailwindcss-animate"),
-    require("tailwind-merge"),
     require("tailwind-scrollbar")
   ]
 };
