@@ -52,7 +52,7 @@
     "types:check": "tsc",
     "tooling": "concurrently \"npm:lint:check\" \"npm:format:check\"",
     "build:build": "rimraf ./dist && tsup",
-    "build": "npm run tooling && npm run build:build && npm:types:check",
+    "build": "npm run tooling && npm run build:build && npm run types:check",
     "version": "changeset version",
     "release": "npm run build && changeset publish"
   },
