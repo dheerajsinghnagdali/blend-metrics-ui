@@ -10,11 +10,5 @@ export default defineConfig({
   },
   dts: true,
   format: ["cjs", "esm"],
-  treeshake: true,
-  sourcemap: "inline",
-  minify: true,
-  clean: true,
-  splitting: false,
-  external: ["react"],
-  injectStyle: false
+  external: ["react"]
 });
