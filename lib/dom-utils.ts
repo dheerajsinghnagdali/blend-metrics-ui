@@ -1,4 +1,4 @@
-import { isUndefined, keys } from "./functions";
+import { isUndefined } from "./functions";
 
 export function getPreview<T extends File>(
   file: T | undefined,
@@ -59,34 +59,8 @@ export function stopPropagation<T extends { stopPropagation: () => void }>(
   event.stopPropagation();
 }
 
-export function getBaseUrl() {
-  if (typeof window === "undefined") return "";
-  return window.origin;
-}
-
-export function triggerPopup({
-  pathname,
-  features = {
-    width: 640,
-    height: 569,
-    left: 320
-  },
-  target = "_blank"
-}: {
-  pathname: string;
-  features: {
-    width?: number;
-    height?: number;
-    left?: number;
-    top?: number;
-  };
-  target: "_self" | "_blank" | "_parent" | "_top";
-}) {
-  const widFeatures = keys(features)
-    .map((key) => (features[key] ? `${key}=${features[key]}` : undefined))
-    .filter(Boolean)
-    .join(",");
-  const url = getBaseUrl() + pathname;
-
-  return window.open(url, target, widFeatures);
+export function preventDefault<T extends { preventDefault: () => void }>(
+  event: T
+) {
+  event.preventDefault();
 }
