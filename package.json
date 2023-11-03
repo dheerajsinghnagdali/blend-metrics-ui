@@ -62,6 +62,7 @@
   "dependencies": {
     "@blend-metrics/icons": "^0.4.5",
     "@headlessui/react": "^1.7.17",
+    "@internationalized/date": "^3.5.0",
     "@radix-ui/react-accordion": "^1.1.2",
     "@radix-ui/react-avatar": "^1.0.4",
     "@radix-ui/react-checkbox": "^1.0.4",
@@ -88,8 +89,10 @@
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.0.0",
     "cmdk": "^0.2.0",
+    "date-fns": "^2.30.0",
     "framer-motion": "^10.16.4",
     "react": "18.x",
+    "react-aria-components": "^1.0.0-beta.2",
     "react-dom": "^18",
     "react-dropzone": "^14.2.3",
     "tailwind-merge": "^1.14.0"

@@ -59,6 +59,12 @@ export function stopPropagation<T extends { stopPropagation: () => void }>(
   event.stopPropagation();
 }
 
+export function preventDefault<T extends { preventDefault: () => void }>(
+  event: T
+) {
+  event.preventDefault();
+}
+
 export function getBaseUrl() {
   if (typeof window === "undefined") return "";
   return window.origin;

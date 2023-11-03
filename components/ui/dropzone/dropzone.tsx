@@ -165,10 +165,7 @@ export const Dropzone = ({
                   <div className="flex">
                     <div className="flex flex-auto gap-x-4 pt-2">
                       <div className="inline-flex h-8 w-8 flex-none items-center justify-center rounded-full border-[4px] border-error-50 bg-error-100 text-error-500">
-                        {category === "doc" && <File />}
-                        {category === "video" && <Video />}
-                        {category === "other" && <UploadCloud />}
-                        {category === "img" && <Image className="h-4 w-4" />}
+                        <UploadCloud className="h-4 w-4" />
                       </div>
                       <div className="flex flex-auto flex-col items-start">
                         <span className="inline-block text-sm font-medium text-error-500">
@@ -188,10 +185,10 @@ export const Dropzone = ({
                     <IconButton
                       onClick={() => onDelete(id)}
                       variant="ghost"
-                      visual="gray"
+                      visual="error"
                       type="button"
                     >
-                      <Trash2 className="h-5 w-5 text-error-500" />
+                      <Trash2 className="h-5 w-5" />
                     </IconButton>
                   </div>
                 </div>
@@ -200,9 +197,12 @@ export const Dropzone = ({
                   <div className="flex">
                     <div className="flex flex-auto gap-x-4 pt-2">
                       <div className="inline-flex h-8 w-8 flex-none items-center justify-center rounded-full border-[4px] border-primary-25 bg-primary-50 text-primary-500">
-                        {(category === "img" || category === "doc") && <File />}
-                        {category === "video" && <Video />}
-                        {category === "other" && <UploadCloud />}
+                        {category === "img" && <Image className="h-4 w-4" />}
+                        {category === "video" && <Video className="h-4 w-4" />}
+                        {category === "doc" && <File className="h-4 w-4" />}
+                        {category === "other" && (
+                          <UploadCloud className="h-4 w-4" />
+                        )}
                       </div>
                       <div className="flex flex-auto flex-col">
                         <span className="inline-block text-sm font-medium text-gray-700">
@@ -224,10 +224,10 @@ export const Dropzone = ({
                       <IconButton
                         onClick={() => onDelete(id)}
                         variant="ghost"
-                        visual="gray"
+                        visual="error"
                         type="button"
                       >
-                        <Trash2 className="h-5 w-5 text-gray-500" />
+                        <Trash2 className="h-5 w-5" />
                       </IconButton>
                     )}
                   </div>
@@ -405,9 +405,7 @@ export const CircularProgressDropzone = ({
                 <div className="flex gap-x-1 rounded-lg border border-error-300 bg-error-25 pb-4 pl-4 pr-2 pt-2">
                   <div className="flex flex-auto gap-x-4 pt-2">
                     <div className="inline-flex h-8 w-8 flex-none items-center justify-center rounded-full border-[4px] border-error-50 bg-error-100 text-error-500">
-                      {(category === "img" || category === "doc") && <File />}
-                      {category === "video" && <Video />}
-                      {category === "other" && <UploadCloud />}
+                      <UploadCloud className="h-4 w-4" />
                     </div>
                     <div className="flex-auto">
                       <div className="text-sm font-medium text-error-500">
@@ -424,8 +422,12 @@ export const CircularProgressDropzone = ({
                       </button>
                     </div>
                   </div>
-                  <IconButton variant="ghost" onClick={() => onDelete(id)}>
-                    <Trash2 className="h-5 w-5 text-error-500" />
+                  <IconButton
+                    variant="ghost"
+                    visual="error"
+                    onClick={() => onDelete(id)}
+                  >
+                    <Trash2 className="h-5 w-5" />
                   </IconButton>
                 </div>
               ) : (
@@ -442,10 +444,12 @@ export const CircularProgressDropzone = ({
                   </div>
                   <div className="relative flex items-start">
                     <div className="inline-flex h-8 w-8 flex-none items-center justify-center rounded-full border-[4px] border-primary-25 bg-primary-50 text-primary-500">
-                      {category === "doc" && <File />}
-                      {category === "video" && <Video />}
-                      {category === "other" && <UploadCloud />}
                       {category === "img" && <Image className="h-4 w-4" />}
+                      {category === "doc" && <File className="h-4 w-4" />}
+                      {category === "video" && <Video className="h-4 w-4" />}
+                      {category === "other" && (
+                        <UploadCloud className="h-4 w-4" />
+                      )}
                     </div>
                     <div className="ml-4 flex-auto">
                       <div className="text-sm font-medium text-gray-700">

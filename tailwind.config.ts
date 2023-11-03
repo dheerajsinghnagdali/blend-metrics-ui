@@ -6,8 +6,7 @@ const config: Config = {
     "./pages/**/*.{ts,tsx}",
     "./components/**/*.{ts,tsx}",
     "./app/**/*.{ts,tsx}",
-    "./src/**/*.{ts,tsx}",
-    "./stories/**/*.{ts,tsx}"
+    "./src/**/*.{ts,tsx}"
   ],
   theme: {
     container: {
@@ -115,7 +114,6 @@ const config: Config = {
     require("@tailwindcss/forms"),
     require("@headlessui/tailwindcss"),
     require("tailwindcss-animate"),
-    require("tailwind-merge"),
     require("tailwind-scrollbar")
   ]
 };
