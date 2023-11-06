@@ -24,7 +24,7 @@ SearchField.displayName = "SearchField";
 
 const SearchFieldInput = React.forwardRef<
   HTMLInputElement,
-  React.HTMLAttributes<HTMLInputElement> &
+  Omit<React.InputHTMLAttributes<HTMLInputElement>, "size"> &
     VariantProps<typeof comboboxInputVariants>
 >(({ size, visual, className, ...props }, ref) => {
   const id = useSearchFieldContext();
@@ -45,7 +45,7 @@ SearchFieldInput.displayName = "SearchFieldInput";
 
 const SearchFieldButton = React.forwardRef<
   HTMLLabelElement,
-  React.HTMLAttributes<HTMLLabelElement> &
+  React.LabelHTMLAttributes<HTMLLabelElement> &
     VariantProps<typeof comboboxButtonVariants>
 >(({ size, align, className, ...props }, ref) => {
   const id = useSearchFieldContext();

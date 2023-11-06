@@ -1,5 +1,11 @@
 # @blend-metrics/ui
 
+## 0.1.0
+
+### Minor Changes
+
+- Complete calendars and one date picker, and fix SearchField's types
+
 ## 0.0.3
 
 ### Patch Changes
