@@ -26,11 +26,7 @@ const TextInput = ({
 }: TextInputProps) => {
   const [state, setState] = useControllableState<string>({
     value,
-    onChange: (value) => {
-      if (!isUndefined(value)) {
-        onValueChange?.(value);
-      }
-    },
+    onChange: onValueChange,
     defaultValue: ""
   });
 
