@@ -47,3 +47,4 @@ export * from "./toggle";
 export * from "./transitions";
 export * from "./calendar";
 export * from "./date-picker";
+export * from "./text-input";
