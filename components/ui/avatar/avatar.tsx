@@ -94,7 +94,7 @@ interface AvatarProps
 const Avatar = React.forwardRef<
   React.ElementRef<typeof AvatarPrimitive.Root>,
   AvatarProps
->(({ className, size, isOnline, badgeClassName, ...props }, ref) => (
+>(({ className, size = "xs", isOnline, badgeClassName, ...props }, ref) => (
   <AvatarProvider value={{ size }}>
     <div className="relative inline-block">
       <AvatarPrimitive.Root
