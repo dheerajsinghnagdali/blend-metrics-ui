@@ -1,6 +1,6 @@
 {
   "name": "@blend-metrics/ui",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Blend Metrics' essential components",
   "author": "Dheeraj Singh Nagdali <dheerajsinghnagdali@gmail.com>",
   "license": "MIT",
@@ -42,6 +42,11 @@
       "import": "./dist/react-utils.mjs",
       "require": "./dist/react-utils.js",
       "types": "./dist/react-utils.d.ts"
+    },
+    "./react-types": {
+      "import": "./dist/react-types.mjs",
+      "require": "./dist/react-types.js",
+      "types": "./dist/react-types.d.ts"
     }
   },
   "scripts": {

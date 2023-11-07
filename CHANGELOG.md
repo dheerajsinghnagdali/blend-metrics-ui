@@ -1,5 +1,11 @@
 # @blend-metrics/ui
 
+## 0.1.1
+
+### Patch Changes
+
+- Improve types of Combobox, Autocomplete, and Listbox
+
 ## 0.1.0
 
 ### Minor Changes

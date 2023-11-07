@@ -4,12 +4,12 @@ import * as React from "react";
 import { Combobox as ComboboxPrimitive } from "@headlessui/react";
 import { VariantProps, cva } from "class-variance-authority";
 import { cn } from "@/lib/functions";
+import { WithoutChildren } from "@/types/react";
 import { labelVariants } from "../label";
 
-// FIXME: its types
-
 interface ComboboxLabelProps
-  extends Omit<React.LabelHTMLAttributes<HTMLLabelElement>, "children"> {
+  extends WithoutChildren<React.LabelHTMLAttributes<HTMLLabelElement>>,
+    VariantProps<typeof labelVariants> {
   children?:
     | React.ReactNode
     | ((bag: {
@@ -18,20 +18,25 @@ interface ComboboxLabelProps
       }) => React.ReactElement<any, string | React.JSXElementConstructor<any>>);
 }
 
-const ComboboxLabel = ({
-  className,
-  size,
-  ...props
-}: ComboboxLabelProps & VariantProps<typeof labelVariants>) => {
-  return (
-    <ComboboxPrimitive.Label
-      className={cn(labelVariants({ className, size }))}
-      {...props}
-    />
-  );
-};
+const ComboboxLabel = React.forwardRef<HTMLLabelElement, ComboboxLabelProps>(
+  ({ className, size, children, ...props }, ref) => {
+    return (
+      <ComboboxPrimitive.Label
+        className={cn(labelVariants({ className, size }))}
+        {...props}
+        ref={ref}
+      />
+    );
+  }
+);
 
-interface ComboboxProps<TValue> {
+ComboboxLabel.displayName = "ComboboxLabel";
+
+interface ComboboxProps<TValue>
+  extends Omit<
+    React.HTMLAttributes<HTMLDivElement>,
+    "children" | "onChange" | "defaultValue"
+  > {
   value?: TValue;
   onChange?: (value: TValue) => void;
   multiple?: boolean;
@@ -69,6 +74,8 @@ const Combobox = <TValue,>({
   );
 };
 
+Combobox.displayName = "Combobox";
+
 const ComboboxTrigger = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
@@ -98,12 +105,10 @@ export const comboboxInputVariants = cva("peer w-full rounded-[5px]", {
 
 interface ComboboxInputProps<T = any>
   extends Omit<
-    Omit<
-      Omit<React.InputHTMLAttributes<HTMLInputElement>, "children">,
-      "defaultValue"
+      React.InputHTMLAttributes<HTMLInputElement>,
+      "children" | "defaultValue" | "size"
     >,
-    "size"
-  > {
+    VariantProps<typeof comboboxInputVariants> {
   as?: React.ElementType;
   defaultValue?: T;
   displayValue?: (item: T) => string;
@@ -115,16 +120,15 @@ interface ComboboxInputProps<T = any>
       }) => React.ReactElement<any, string | React.JSXElementConstructor<any>>);
 }
 
-const ComboboxInput = React.forwardRef<
-  HTMLInputElement,
-  ComboboxInputProps & VariantProps<typeof comboboxInputVariants>
->(({ className, visual, size, ...props }, ref) => (
-  <ComboboxPrimitive.Input
-    className={cn(comboboxInputVariants({ visual, size, className }))}
-    {...props}
-    ref={ref}
-  />
-));
+const ComboboxInput = React.forwardRef<HTMLInputElement, ComboboxInputProps>(
+  ({ className, visual, size, ...props }, ref) => (
+    <ComboboxPrimitive.Input
+      className={cn(comboboxInputVariants({ visual, size, className }))}
+      {...props}
+      ref={ref}
+    />
+  )
+);
 
 ComboboxInput.displayName = "ComboboxInput";
 
@@ -171,7 +175,7 @@ export const comboboxButtonVariants = cva(
 );
 
 interface ComboboxButtonProps
-  extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, "children"> {
+  extends WithoutChildren<React.ButtonHTMLAttributes<HTMLButtonElement>> {
   children?:
     | React.ReactNode
     | ((bag: {
@@ -186,7 +190,7 @@ const ComboboxButton = React.forwardRef<
   ComboboxButtonProps & VariantProps<typeof comboboxButtonVariants>
 >(({ className, size, align, ...props }, ref) => (
   <ComboboxPrimitive.Button
-    className={comboboxButtonVariants({ size, align, className })}
+    className={cn(comboboxButtonVariants({ size, align, className }))}
     {...props}
     ref={ref}
   />
@@ -195,7 +199,7 @@ const ComboboxButton = React.forwardRef<
 ComboboxButton.displayName = "ComboboxButton";
 
 interface ComboboxOptionsProps
-  extends Omit<React.HTMLAttributes<HTMLUListElement>, "children"> {
+  extends WithoutChildren<React.HTMLAttributes<HTMLUListElement>> {
   children?:
     | React.ReactNode
     | ((bag: {
@@ -220,10 +224,7 @@ const ComboboxOptions = React.forwardRef<
 ComboboxOptions.displayName = "ComboboxOptions";
 
 interface ComboboxOptionProps<TValue = any>
-  extends Omit<
-    Omit<React.LiHTMLAttributes<HTMLLIElement>, "value">,
-    "children"
-  > {
+  extends Omit<React.LiHTMLAttributes<HTMLLIElement>, "children" | "value"> {
   value: TValue;
   children?:
     | React.ReactNode

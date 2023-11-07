@@ -6,9 +6,14 @@ import { Listbox as ListboxPrimitive, Transition } from "@headlessui/react";
 import { VariantProps } from "class-variance-authority";
 import { cn, isString } from "@/lib/functions";
 import { useControllableState } from "@/lib/hooks";
+import { WithoutChildren } from "@/types/react";
 import { labelVariants } from "../label";
 
-interface ListboxProps<T> {
+interface ListboxProps<T>
+  extends Omit<
+    React.HTMLAttributes<HTMLDivElement>,
+    "defaultValue" | "children" | "onChange"
+  > {
   value?: T;
   defaultValue?: T;
   onChange?: (value: T) => void;
@@ -47,7 +52,8 @@ export const Listbox = <T,>({
 };
 
 interface ListboxLabel
-  extends Omit<React.LabelHTMLAttributes<HTMLLabelElement>, "children"> {
+  extends WithoutChildren<React.LabelHTMLAttributes<HTMLLabelElement>>,
+    VariantProps<typeof labelVariants> {
   children?:
     | React.ReactNode
     | ((bag: {
@@ -56,18 +62,17 @@ interface ListboxLabel
       }) => React.ReactElement<any, string | React.JSXElementConstructor<any>>);
 }
 
-export const ListboxLabel = React.forwardRef<
-  HTMLLabelElement,
-  ListboxLabel & VariantProps<typeof labelVariants>
->(({ className, size, ...props }, ref) => {
-  return (
-    <ListboxPrimitive.Label
-      className={cn(labelVariants({ className, size }))}
-      ref={ref}
-      {...props}
-    />
-  );
-});
+export const ListboxLabel = React.forwardRef<HTMLLabelElement, ListboxLabel>(
+  ({ className, size, ...props }, ref) => {
+    return (
+      <ListboxPrimitive.Label
+        className={cn(labelVariants({ className, size }))}
+        ref={ref}
+        {...props}
+      />
+    );
+  }
+);
 
 ListboxLabel.displayName = "ListboxLabel";
 
@@ -81,7 +86,7 @@ export const ListboxContent = React.forwardRef<
 ListboxContent.displayName = "ListboxContent";
 
 interface ListboxButtonProps<T = any>
-  extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, "children"> {
+  extends WithoutChildren<React.ButtonHTMLAttributes<HTMLButtonElement>> {
   className?: string;
   children?: ({
     value,
@@ -139,7 +144,7 @@ export const ListboxButton = ({
 };
 
 interface ListboxOptions
-  extends Omit<React.HTMLAttributes<HTMLUListElement>, "children"> {
+  extends WithoutChildren<React.HTMLAttributes<HTMLUListElement>> {
   children:
     | React.ReactNode
     | ((bag: {
@@ -171,10 +176,7 @@ export const ListboxOptions = React.forwardRef<
 ListboxOptions.displayName = "ListboxOptions";
 
 interface ListboxOption<T = any>
-  extends Omit<
-    Omit<React.LiHTMLAttributes<HTMLLIElement>, "value">,
-    "children"
-  > {
+  extends Omit<React.LiHTMLAttributes<HTMLLIElement>, "value" | "children"> {
   value: T;
   children?: React.ReactNode;
   iconClassName?: string;

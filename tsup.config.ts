@@ -6,7 +6,8 @@ export default defineConfig({
     functions: "lib/functions.ts",
     hooks: "lib/hooks.ts",
     "dom-utils": "lib/dom-utils.ts",
-    "react-utils": "lib/react-utils.ts"
+    "react-utils": "lib/react-utils.ts",
+    "react-types": "types/react.ts"
   },
   dts: true,
   format: ["cjs", "esm"],

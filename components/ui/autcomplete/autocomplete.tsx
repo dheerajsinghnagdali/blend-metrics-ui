@@ -5,9 +5,8 @@ import { Check } from "@blend-metrics/icons";
 import { Combobox as AutocompletePrimitives } from "@headlessui/react";
 import { VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/functions";
+import { WithoutChildren } from "@/types/react";
 import { labelVariants } from "../label";
-
-// FIXME: its types
 
 interface AutocompleteRootProps<TValue> {
   value?: TValue;
@@ -48,7 +47,8 @@ const Autocomplete = React.forwardRef<
 Autocomplete.displayName = "Autocomplete";
 
 interface AutocompleteLabelProps
-  extends Omit<React.LabelHTMLAttributes<HTMLLabelElement>, "children"> {
+  extends WithoutChildren<React.LabelHTMLAttributes<HTMLLabelElement>>,
+    VariantProps<typeof labelVariants> {
   children?:
     | React.ReactNode
     | ((bag: {
@@ -59,7 +59,7 @@ interface AutocompleteLabelProps
 
 const AutocompleteLabel = React.forwardRef<
   HTMLLabelElement,
-  AutocompleteLabelProps & VariantProps<typeof labelVariants>
+  AutocompleteLabelProps
 >(({ className, size, ...props }, ref) => (
   <AutocompletePrimitives.Label
     className={cn(labelVariants({ className, size }))}
@@ -81,8 +81,8 @@ AutocompleteTrigger.displayName = "AutocompleteTrigger";
 
 interface AutocompleteInputProps<T = any>
   extends Omit<
-    Omit<React.InputHTMLAttributes<HTMLInputElement>, "children">,
-    "defaultValue"
+    React.InputHTMLAttributes<HTMLInputElement>,
+    "children" | "defaultValue"
   > {
   as?: React.ElementType;
   defaultValue?: T;
@@ -112,7 +112,7 @@ const AutocompleteInput = React.forwardRef<
 AutocompleteInput.displayName = "AutocompleteInput";
 
 interface AutocompleteButtonProps
-  extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, "children"> {
+  extends WithoutChildren<React.ButtonHTMLAttributes<HTMLButtonElement>> {
   children?:
     | React.ReactNode
     | ((bag: {
@@ -139,7 +139,7 @@ const AutocompleteButton = React.forwardRef<
 AutocompleteButton.displayName = "AutocompleteButton";
 
 interface AutocompleteOptionsProps
-  extends Omit<React.HTMLAttributes<HTMLUListElement>, "children"> {
+  extends WithoutChildren<React.HTMLAttributes<HTMLUListElement>> {
   children?:
     | React.ReactNode
     | ((bag: {
@@ -164,10 +164,7 @@ const AutocompleteOptions = React.forwardRef<
 AutocompleteOptions.displayName = "AutocompleteOptions";
 
 interface AutocompleteOptionProps<TValue = any>
-  extends Omit<
-    Omit<React.LiHTMLAttributes<HTMLLIElement>, "value">,
-    "children"
-  > {
+  extends Omit<React.LiHTMLAttributes<HTMLLIElement>, "value" | "children"> {
   value: TValue;
   children?:
     | React.ReactNode
