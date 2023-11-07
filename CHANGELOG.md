@@ -1,5 +1,11 @@
 # @blend-metrics/ui
 
+## 0.2.0
+
+### Minor Changes
+
+- Listbox's height is as much as its content, and it has got a max height.
+
 ## 0.1.2
 
 ### Patch Changes

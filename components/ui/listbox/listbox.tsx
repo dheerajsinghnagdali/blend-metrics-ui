@@ -4,9 +4,10 @@ import * as React from "react";
 import { Check, ChevronDown } from "@blend-metrics/icons";
 import { Listbox as ListboxPrimitive, Transition } from "@headlessui/react";
 import { VariantProps } from "class-variance-authority";
-import { cn, isString } from "@/lib/functions";
+import { cn, isFn, isString } from "@/lib/functions";
 import { useControllableState } from "@/lib/hooks";
 import { WithoutChildren } from "@/types/react";
+import { ScrollArea, ScrollBar } from "..";
 import { labelVariants } from "../label";
 
 interface ListboxProps<T>
@@ -150,28 +151,47 @@ interface ListboxOptions
     | ((bag: {
         open: boolean;
       }) => React.ReactElement<any, string | React.JSXElementConstructor<any>>);
+
+  viewportClassName?: string;
+  wrapperClassName?: string;
 }
 
 export const ListboxOptions = React.forwardRef<
   HTMLUListElement,
   ListboxOptions
->(({ className, ...props }, ref) => (
-  <Transition
-    as={React.Fragment}
-    leave="transition ease-in duration-100"
-    leaveFrom="opacity-100"
-    leaveTo="opacity-0"
-  >
-    <ListboxPrimitive.Options
-      ref={ref}
-      className={cn(
-        "absolute z-10 mt-1 h-[206px] w-full space-y-1 overflow-y-auto rounded-md bg-white py-1 text-base shadow-lg scrollbar-thin scrollbar-track-gray-200 scrollbar-track-rounded-lg focus:outline-none sm:text-sm",
-        className
-      )}
-      {...props}
-    />
-  </Transition>
-));
+>(
+  (
+    { className, viewportClassName, children, wrapperClassName, ...props },
+    ref
+  ) => (
+    <Transition
+      as={React.Fragment}
+      leave="transition ease-in duration-100"
+      leaveFrom="opacity-100"
+      leaveTo="opacity-0"
+    >
+      <ListboxPrimitive.Options
+        ref={ref}
+        className={cn(
+          "absolute z-10 mt-1 w-full rounded-md bg-white text-base shadow-lg focus:outline-none sm:text-sm",
+          className
+        )}
+        {...props}
+      >
+        {({ open }) => (
+          <ScrollArea
+            scrollBar={<ScrollBar className="p-1 w-4" />}
+            viewportClassName={cn("py-1 max-h-[206px]", viewportClassName)}
+          >
+            <div className={cn("space-y-1", wrapperClassName)}>
+              {isFn(children) ? children({ open }) : children}
+            </div>
+          </ScrollArea>
+        )}
+      </ListboxPrimitive.Options>
+    </Transition>
+  )
+);
 
 ListboxOptions.displayName = "ListboxOptions";
 

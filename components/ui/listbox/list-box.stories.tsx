@@ -25,7 +25,9 @@ const people: People = [
   { name: "Devon Webb" },
   { name: "Tom Cook" },
   { name: "Tanya Fox" },
-  { name: "Hellen Schmidt" }
+  { name: "Hellen Schmidt" },
+  { name: "Hellen Walker" },
+  { name: "Hellen Waller" }
 ];
 
 export const Default = () => {
