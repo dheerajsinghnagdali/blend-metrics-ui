@@ -726,7 +726,7 @@ export const ChooseSidebar = () => {
             View All
           </Button>
         </div>
-        <SearchField>
+        <SearchField className="w-full">
           <SearchFieldInput
             className="pr-[46px]"
             onChange={(event) => setQuery(event.target.value)}
@@ -735,12 +735,14 @@ export const ChooseSidebar = () => {
           <SearchFieldButton>
             <SearchMd className="h-4 w-4" />
           </SearchFieldButton>
-          <button
-            className="focus-visible:outline-none whitespace-nowrap absolute text-sm font-semibold text-gray-500 top-1/2 -translate-y-1/2 right-2.5"
-            onClick={resetQuery}
-          >
-            Clear
-          </button>
+          {query && (
+            <button
+              className="focus-visible:outline-none whitespace-nowrap absolute text-sm font-semibold text-gray-500 top-1/2 -translate-y-1/2 right-2.5"
+              onClick={resetQuery}
+            >
+              Clear
+            </button>
+          )}
         </SearchField>
       </div>
 
