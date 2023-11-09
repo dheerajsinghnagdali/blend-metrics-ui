@@ -1,5 +1,11 @@
 # @blend-metrics/ui
 
+## 0.2.1
+
+### Patch Changes
+
+- Add components from previous design system and new sidebars. Moreover, a spinner has been added
+
 ## 0.2.0
 
 ### Minor Changes

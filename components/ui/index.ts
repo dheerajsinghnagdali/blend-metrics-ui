@@ -48,3 +48,5 @@ export * from "./transitions";
 export * from "./calendar";
 export * from "./date-picker";
 export * from "./text-input";
+export * from "./favorite";
+export * from "./rounded-button";

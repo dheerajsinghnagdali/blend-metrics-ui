@@ -15,10 +15,12 @@ import {
 
 const DatePicker = ({
   value,
-  onValueChange
+  onValueChange,
+  placeholder
 }: {
   value?: Date;
   onValueChange?: (value: Date) => void;
+  placeholder?: string;
 }) => {
   const [date, setDate] = useControllableState({
     value,
@@ -47,7 +49,9 @@ const DatePicker = ({
           {date ? (
             format(date, "LLL d, yyyy")
           ) : (
-            <span className="text-gray-500">Select a date</span>
+            <span className="text-gray-500">
+              {placeholder ? placeholder : "Select a date"}
+            </span>
           )}
         </Button>
       </PopoverTrigger>

@@ -6,7 +6,8 @@ import {
   ChevronDown,
   Search,
   SwitchHorizontal02,
-  Users
+  Users,
+  X1
 } from "@blend-metrics/icons";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Meta } from "@storybook/react";
@@ -40,6 +41,7 @@ import {
   DialogTitle,
   DialogTrigger,
   HelperText,
+  IconButton,
   Input,
   InputGroup,
   InputLeftElement,
@@ -47,7 +49,11 @@ import {
   Label,
   RadioGroup,
   RadioGroupItemSelector,
-  ScrollArea
+  ScrollArea,
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger
 } from "@/components/ui";
 
 const meta: Meta = {
@@ -818,6 +824,118 @@ export const Congratulations = () => {
 
           <DialogClose asChild>
             <Button>Assign Users</Button>
+          </DialogClose>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
+  );
+};
+
+export const Rename = () => {
+  return (
+    <Dialog>
+      <DialogTrigger asChild>
+        <Button>Open</Button>
+      </DialogTrigger>
+      <DialogContent className="max-w-none w-[396px]">
+        <DialogHeader className="flex-row gap-x-2">
+          <DialogTitle className="flex-grow">Rename this Version</DialogTitle>
+
+          <TooltipProvider>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <DialogClose asChild>
+                  <IconButton
+                    className="text-gray-500 hover:text-gray-900 h-7 w-7"
+                    variant="ghost"
+                    visual="gray"
+                  >
+                    <X1 className="h-[18px] w-[18px]" />
+                  </IconButton>
+                </DialogClose>
+              </TooltipTrigger>
+              <TooltipContent
+                align="center"
+                className="font-semibold"
+                side="bottom"
+              >
+                Close
+              </TooltipContent>
+            </Tooltip>
+          </TooltipProvider>
+        </DialogHeader>
+
+        <div className="mt-5 space-y-1.5">
+          <Label className="text-gray-700" size="sm">
+            Version Name
+          </Label>
+          <Input className="text-gray-900" defaultValue="New Team Version" />
+        </div>
+
+        <DialogFooter className="mt-8 grid gap-x-3">
+          <DialogClose asChild>
+            <Button variant="outlined" visual="gray">
+              Cancel
+            </Button>
+          </DialogClose>
+          <DialogClose asChild>
+            <Button>Save</Button>
+          </DialogClose>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
+  );
+};
+
+export const Name = () => {
+  return (
+    <Dialog>
+      <DialogTrigger asChild>
+        <Button>Open</Button>
+      </DialogTrigger>
+      <DialogContent className="max-w-none w-[396px]">
+        <DialogHeader className="flex-row gap-x-2">
+          <DialogTitle className="flex-grow">Name this Version</DialogTitle>
+
+          <TooltipProvider>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <DialogClose asChild>
+                  <IconButton
+                    className="text-gray-500 hover:text-gray-900 h-7 w-7"
+                    variant="ghost"
+                    visual="gray"
+                  >
+                    <X1 className="h-[18px] w-[18px]" />
+                  </IconButton>
+                </DialogClose>
+              </TooltipTrigger>
+              <TooltipContent
+                align="center"
+                className="font-semibold"
+                side="bottom"
+              >
+                Close
+              </TooltipContent>
+            </Tooltip>
+          </TooltipProvider>
+        </DialogHeader>
+
+        <div className="mt-5 space-y-1.5">
+          <Label className="text-gray-700" size="sm">
+            Version Name
+          </Label>
+          <Input className="text-gray-900" placeholder="Enter the name" />
+        </div>
+
+        <DialogFooter className="mt-8 grid gap-x-3">
+          <DialogClose asChild>
+            <Button variant="outlined" visual="gray">
+              Cancel
+            </Button>
+          </DialogClose>
+          <DialogClose asChild>
+            <Button>Save</Button>
           </DialogClose>
         </DialogFooter>
       </DialogContent>

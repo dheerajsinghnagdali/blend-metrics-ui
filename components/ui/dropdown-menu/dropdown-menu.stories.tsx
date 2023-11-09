@@ -7,7 +7,7 @@ import {
   HelpCircle,
   LogOut,
   MoreHorizontal,
-  Settings,
+  Settings01,
   Trash2,
   User,
   UserPlus,
@@ -144,7 +144,7 @@ export const IconsDetailedAvatarDefault: Story = {
           <AvatarFallback>M</AvatarFallback>
         </Avatar>
       </DropdownMenuTrigger>
-      <DropdownMenuContent>
+      <DropdownMenuContent className="w-[278px] max-w-none">
         <DropdownMenuLabel className="font-normal" size="md">
           <div className="inline-flex items-center gap-x-3">
             <Avatar size="md">
@@ -166,7 +166,7 @@ export const IconsDetailedAvatarDefault: Story = {
           View Profile
         </DropdownMenuItem>
         <DropdownMenuItem>
-          <Settings className="h-4 w-4" />
+          <Settings01 className="h-4 w-4" />
           Settings
         </DropdownMenuItem>
         <DropdownMenuItem>
