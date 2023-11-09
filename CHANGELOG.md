@@ -1,5 +1,11 @@
 # @blend-metrics/ui
 
+## 0.3.0
+
+### Minor Changes
+
+- Spinner and Favorite and Some cards
+
 ## 0.2.1
 
 ### Patch Changes

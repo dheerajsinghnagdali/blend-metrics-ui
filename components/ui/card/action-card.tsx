@@ -8,7 +8,7 @@ const ActionCardRoot = ({
   return (
     <div
       className={cn(
-        "px-5 flex gap-x-3 hover:bg-gray-50 active:bg-primary-50 cursor-pointer shadow-[0px_1px_4px_0px_rgba(0,0,0,0.03)] items-center py-3",
+        "px-5 flex gap-x-3 hover:bg-gray-50 active:bg-primary-50 cursor-pointer items-center py-3",
         className
       )}
       {...props}

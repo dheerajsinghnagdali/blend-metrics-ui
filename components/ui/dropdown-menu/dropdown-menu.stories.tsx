@@ -144,7 +144,7 @@ export const IconsDetailedAvatarDefault: Story = {
           <AvatarFallback>M</AvatarFallback>
         </Avatar>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="w-[278px] max-w-none">
+      <DropdownMenuContent className="w-[278px]">
         <DropdownMenuLabel className="font-normal" size="md">
           <div className="inline-flex items-center gap-x-3">
             <Avatar size="md">
