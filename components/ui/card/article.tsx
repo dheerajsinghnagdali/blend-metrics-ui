@@ -1,5 +1,6 @@
 "use client";
 
+import { Slot } from "@radix-ui/react-slot";
 import { VariantProps, cva } from "class-variance-authority";
 import { cn } from "@/lib/functions";
 import { createContext } from "@/lib/react-utils";
@@ -11,7 +12,7 @@ const articleVariants = cva(
       variant: {
         default: "p-3 pr-[18px]",
         outlined:
-          "hover:ring-1 h-[68px] hover:border-gray-300 p-3 shadow-[0px_1px_4px_0px_rgba(0,0,0,0.03)] hover:ring-gray-300",
+          "hover:ring-1 h-[68px] hover:border-gray-300 cursor-grab p-3 shadow-[0px_1px_4px_0px_rgba(0,0,0,0.03)] hover:ring-gray-300",
         destructive:
           "hover:ring-1 hover:border-gray-300 p-3 hover:ring-gray-300 active:ring-1 active:border-primary-500 active:ring-primary-500"
       }
@@ -28,6 +29,7 @@ interface ArticleProps
   isDragging?: boolean;
   isError?: boolean;
   isSelected?: boolean;
+  asChild?: boolean;
 }
 
 const [ArticleProvider, useArticleContext] = createContext<{
@@ -42,11 +44,13 @@ const Article = ({
   variant,
   isError,
   isSelected,
+  asChild,
   ...props
 }: ArticleProps) => {
+  const Comp = asChild ? Slot : "div";
   return (
     <ArticleProvider value={{ variant }}>
-      <div
+      <Comp
         className={cn(
           articleVariants({ variant }),
           {
@@ -54,7 +58,7 @@ const Article = ({
               isDragging,
             "border-red-500 ring-1 ring-red-500 active:border-red-500 active:ring-red-500 hover:border-red-500 hover:ring-red-500":
               isError,
-            "ring-1 border-primary-200 min-w-[200px] max-w-[300px] ring-primary-200 shadow-[7px_14px_23px_5px_rgba(0,0,0,0.08)]":
+            "ring-1 border-primary-200 hover:border-primary-200 hover:ring-primary-200 min-w-[200px] max-w-[300px] ring-primary-200 shadow-[7px_14px_23px_5px_rgba(0,0,0,0.08)]":
               isSelected
           },
           className
