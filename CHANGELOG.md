@@ -1,5 +1,11 @@
 # @blend-metrics/ui
 
+## 0.4.0
+
+### Minor Changes
+
+- More states to ArticelCard
+
 ## 0.3.0
 
 ### Minor Changes
