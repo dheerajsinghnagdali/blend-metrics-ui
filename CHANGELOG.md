@@ -1,5 +1,11 @@
 # @blend-metrics/ui
 
+## 0.5.0
+
+### Minor Changes
+
+- 30d7a04: asChild to Article
+
 ## 0.4.0
 
 ### Minor Changes
