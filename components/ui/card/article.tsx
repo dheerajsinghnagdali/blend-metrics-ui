@@ -30,6 +30,7 @@ interface ArticleProps
   isError?: boolean;
   isSelected?: boolean;
   asChild?: boolean;
+  isGrabbed?: boolean;
 }
 
 const [ArticleProvider, useArticleContext] = createContext<{
@@ -44,6 +45,7 @@ const Article = ({
   variant,
   isError,
   isSelected,
+  isGrabbed,
   asChild,
   ...props
 }: ArticleProps) => {
@@ -59,6 +61,8 @@ const Article = ({
             "border-red-500 ring-1 ring-red-500 active:border-red-500 active:ring-red-500 hover:border-red-500 hover:ring-red-500":
               isError,
             "ring-1 border-primary-200 hover:border-primary-200 hover:ring-primary-200 min-w-[200px] max-w-[300px] ring-primary-200 shadow-[7px_14px_23px_5px_rgba(0,0,0,0.08)]":
+              isGrabbed,
+            "border-primary-500 ring-1 ring-primary-500 hover:border-primary-500 hover:ring-primary-500 min-w-[200px] max-w-[300px] shadow-[0px_1px_4px_0px_rgba(48,108,254,0.13)]":
               isSelected
           },
           className

@@ -1,5 +1,11 @@
 # @blend-metrics/ui
 
+## 0.5.1
+
+### Patch Changes
+
+- And one more state to ArticleCard
+
 ## 0.5.0
 
 ### Minor Changes

@@ -172,18 +172,22 @@ export const ArticleOutlinedVariant: ArticleStory = {
     },
     isSelected: {
       control: "boolean"
+    },
+    isGrabbed: {
+      control: "boolean"
     }
   },
   args: {
     isDragging: false,
-    isSelected: false
+    isSelected: false,
+    isGrabbed: false
   },
   render: (args) => (
     <Article variant="outlined" {...args}>
       <ArticleIcon>
         <Aperture className="h-5 w-5" />
       </ArticleIcon>
-      <ArticleContent className="w-[calc(theme(width.full)-theme(width.11))]">
+      <ArticleContent className="w-[calc(theme(width.full)-52px)]">
         <ArticleTitle>Add Event</ArticleTitle>
         <ArticleDescription>
           TypeError: A dynamic import callback was not specified.
