@@ -1,5 +1,11 @@
 # @blend-metrics/ui
 
+## 0.5.2
+
+### Patch Changes
+
+- Extend the Article component with one more state
+
 ## 0.5.1
 
 ### Patch Changes

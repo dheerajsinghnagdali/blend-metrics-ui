@@ -31,6 +31,7 @@ interface ArticleProps
   isSelected?: boolean;
   asChild?: boolean;
   isGrabbed?: boolean;
+  isOnCanvas?: boolean;
 }
 
 const [ArticleProvider, useArticleContext] = createContext<{
@@ -46,6 +47,7 @@ const Article = ({
   isError,
   isSelected,
   isGrabbed,
+  isOnCanvas,
   asChild,
   ...props
 }: ArticleProps) => {
@@ -63,7 +65,8 @@ const Article = ({
             "ring-1 border-primary-200 hover:border-primary-200 hover:ring-primary-200 min-w-[200px] max-w-[300px] ring-primary-200 shadow-[7px_14px_23px_5px_rgba(0,0,0,0.08)]":
               isGrabbed,
             "border-primary-500 ring-1 ring-primary-500 hover:border-primary-500 hover:ring-primary-500 min-w-[200px] max-w-[300px] shadow-[0px_1px_4px_0px_rgba(48,108,254,0.13)]":
-              isSelected
+              isSelected,
+            "min-w-[200px] max-w-[300px]": isOnCanvas
           },
           className
         )}
