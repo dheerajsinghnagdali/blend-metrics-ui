@@ -1,5 +1,11 @@
 # @blend-metrics/ui
 
+## 0.7.2
+
+### Patch Changes
+
+- Fix className issue in ScrollAreaScrollbar
+
 ## 0.7.1
 
 ### Patch Changes
