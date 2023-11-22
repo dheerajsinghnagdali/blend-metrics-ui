@@ -84,4 +84,36 @@ const ScrollBar = React.forwardRef<
 ));
 ScrollBar.displayName = ScrollAreaPrimitive.ScrollAreaScrollbar.displayName;
 
-export { ScrollArea, ScrollBar };
+const ScrollAreaScrollbar = React.forwardRef<
+  React.ElementRef<typeof ScrollAreaPrimitive.ScrollAreaScrollbar>,
+  React.ComponentProps<typeof ScrollAreaPrimitive.ScrollAreaScrollbar>
+>(({ orientation = "vertical", className, ...props }, ref) => (
+  <ScrollAreaPrimitive.ScrollAreaScrollbar
+    className={cn(
+      "flex touch-none select-none border-l border-l-transparent p-[1px] transition-colors",
+      {
+        "h-2.5": orientation === "horizontal",
+        "h-full w-2.5": orientation === "vertical"
+      }
+    )}
+    ref={ref}
+    {...props}
+  />
+));
+
+ScrollAreaScrollbar.displayName = "ScrollAreaScrollbar";
+
+const ScrollAreaThumb = React.forwardRef<
+  React.ElementRef<typeof ScrollAreaPrimitive.ScrollAreaThumb>,
+  React.ComponentProps<typeof ScrollAreaPrimitive.ScrollAreaThumb>
+>(({ className, ...props }, ref) => (
+  <ScrollAreaPrimitive.ScrollAreaThumb
+    className={cn("relative flex-1 rounded-lg bg-gray-200", className)}
+    ref={ref}
+    {...props}
+  />
+));
+
+ScrollAreaThumb.displayName = "ScrollAreaThumb";
+
+export { ScrollArea, ScrollBar, ScrollAreaScrollbar, ScrollAreaThumb };
