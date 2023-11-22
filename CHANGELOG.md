@@ -1,5 +1,11 @@
 # @blend-metrics/ui
 
+## 0.7.1
+
+### Patch Changes
+
+- Extend ScrollArea functionality
+
 ## 0.7.0
 
 ### Minor Changes
