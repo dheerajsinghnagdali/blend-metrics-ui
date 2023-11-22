@@ -94,7 +94,8 @@ const ScrollAreaScrollbar = React.forwardRef<
       {
         "h-2.5": orientation === "horizontal",
         "h-full w-2.5": orientation === "vertical"
-      }
+      },
+      className
     )}
     ref={ref}
     {...props}
