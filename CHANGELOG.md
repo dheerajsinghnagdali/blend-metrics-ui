@@ -1,5 +1,11 @@
 # @blend-metrics/ui
 
+## 0.7.0
+
+### Minor Changes
+
+- Add Editable propertly
+
 ## 0.6.0
 
 ### Minor Changes

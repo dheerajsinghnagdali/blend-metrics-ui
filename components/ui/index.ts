@@ -52,3 +52,4 @@ export * from "./favorite";
 export * from "./rounded-button";
 export * from "./percentage-input";
 export * from "./slider";
+export * from "./editable";
