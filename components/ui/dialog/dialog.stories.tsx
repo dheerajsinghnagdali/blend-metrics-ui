@@ -5,8 +5,10 @@ import {
   CheckCircle1,
   ChevronDown,
   Search,
+  SearchMd,
   SwitchHorizontal02,
   Users,
+  X,
   X1
 } from "@blend-metrics/icons";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -24,7 +26,7 @@ import {
 import { SubmitHandler, useForm } from "react-hook-form";
 import { z } from "zod";
 import { first, nope } from "@/lib/functions";
-import { useDebounce } from "@/lib/hooks";
+import { useDebounce, useToggle } from "@/lib/hooks";
 import {
   Avatar,
   AvatarFallback,
@@ -32,6 +34,13 @@ import {
   Badge,
   Button,
   Checkbox,
+  Combobox,
+  ComboboxButton,
+  ComboboxInput,
+  ComboboxLabel,
+  ComboboxOption,
+  ComboboxOptions,
+  ComboboxTrigger,
   Dialog,
   DialogClose,
   DialogContent,
@@ -48,7 +57,9 @@ import {
   InputRightElement,
   Label,
   RadioGroup,
+  RadioGroupItem,
   RadioGroupItemSelector,
+  ScaleOutIn,
   ScrollArea,
   Tooltip,
   TooltipContent,
@@ -937,6 +948,166 @@ export const Name = () => {
           <DialogClose asChild>
             <Button>Save</Button>
           </DialogClose>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
+  );
+};
+
+export const DeletePathVariant = () => {
+  return (
+    <Dialog>
+      <DialogTrigger asChild>
+        <Button>Open</Button>
+      </DialogTrigger>
+      <DialogContent>
+        <DialogHeader>
+          <div className="flex h-12 w-12 flex-none items-center justify-center rounded-full border-8 border-error-50 bg-error-100">
+            <AlertCircle className="h-4 w-4 text-error-600" />
+          </div>
+
+          <div className="flex flex-col gap-y-2">
+            <DialogTitle>Delete Writer Role?</DialogTitle>
+            <DialogDescription>
+              Are you sure you want to delete this path? This action will delete
+              all subsequent actions on the path.
+            </DialogDescription>
+          </div>
+        </DialogHeader>
+
+        <DialogFooter className="mt-8">
+          <DialogClose asChild>
+            <Button variant="outlined" visual="gray">
+              Cancel
+            </Button>
+          </DialogClose>
+          <Button visual="error">Yes, Delete</Button>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
+  );
+};
+
+export const DeleteSlipPathBlock = () => {
+  return (
+    <Dialog>
+      <DialogTrigger asChild>
+        <Button>Open</Button>
+      </DialogTrigger>
+      <DialogContent className="w-[552px]">
+        <DialogHeader>
+          <div className="space-y-2">
+            <DialogTitle>Delete Split Path Block</DialogTitle>
+            <DialogDescription>
+              You are removing an action in the middle of an existing series of
+              actions, to continue you can:
+            </DialogDescription>
+          </div>
+        </DialogHeader>
+
+        <div className="mt-8">
+          <RadioGroup>
+            <div className="flex gap-x-3">
+              <RadioGroupItem id="sm-option-one" value="item-1" />
+              <Label htmlFor="sm-item-one">Remove all paths</Label>
+            </div>
+            <div className="flex gap-x-3">
+              <RadioGroupItem id="sm-item-two" value="item-2" />
+              <Label htmlFor="sm-item-two">Select which path to keep</Label>
+            </div>
+          </RadioGroup>
+        </div>
+
+        <DialogFooter className="mt-8 flex justify-end gap-x-3">
+          <DialogClose asChild>
+            <Button visual="gray" variant="outlined">
+              Cancel
+            </Button>
+          </DialogClose>
+          <Button>Continue</Button>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
+  );
+};
+
+export const SaveToCollectionsVariant = () => {
+  const content = React.useMemo(
+    () => ["Other block 1", "Other block 2", "Other block 3", "Other block 4"],
+    []
+  );
+  const [selected, setSelected] = React.useState<string>();
+  const [query, setQuery] = React.useState("");
+  const filteredContent =
+    query === ""
+      ? content
+      : content.filter((value) =>
+          value.toLowerCase().includes(query.toLowerCase())
+        );
+
+  return (
+    <Dialog>
+      <DialogTrigger asChild>
+        <Button>Open</Button>
+      </DialogTrigger>
+      <DialogContent className="w-[396px]">
+        <DialogHeader>
+          <div className="flex items-center justify-between">
+            <DialogTitle className="flex-grow">Save to Collection?</DialogTitle>
+            <DialogClose asChild>
+              <IconButton
+                className="h-7 w-7 text-gray-500"
+                visual="gray"
+                variant="ghost"
+              >
+                <X className="h-[18px] w-[18px]" />
+              </IconButton>
+            </DialogClose>
+          </div>
+
+          <Combobox className="w-full" value={selected} onChange={setSelected}>
+            <ComboboxLabel className="text-gray-700" size="sm">
+              File Name
+            </ComboboxLabel>
+            <ComboboxTrigger className="mt-1.5">
+              <ComboboxInput
+                className="pl-3 pr-[30px]"
+                onChange={(event) => setQuery(event.target.value)}
+              />
+              <ComboboxButton className="left-auto peer-focus:text-gray-500 right-2.5">
+                <ChevronDown className="h-5 w-5 ui-open:-rotate-180 ui-not-open:-rotate-0 transition duration-300" />
+              </ComboboxButton>
+              <ScaleOutIn>
+                <ComboboxOptions>
+                  <ScrollArea className="h-[304px]">
+                    {filteredContent.map((value, key) => (
+                      <ComboboxOption value={value} key={key}>
+                        {value}
+                      </ComboboxOption>
+                    ))}
+                  </ScrollArea>
+                </ComboboxOptions>
+              </ScaleOutIn>
+            </ComboboxTrigger>
+            {selected && (
+              <HelperText className="mt-1.5" size="sm">
+                “{selected}” already exists. Do you want to replace it?
+              </HelperText>
+            )}
+          </Combobox>
+        </DialogHeader>
+
+        <DialogFooter className="mt-8">
+          <DialogClose asChild>
+            <Button variant="outlined" visual="gray">
+              Cancel
+            </Button>
+          </DialogClose>
+          {selected ? (
+            <Button visual="error">Replace</Button>
+          ) : (
+            <Button>Save</Button>
+          )}
         </DialogFooter>
       </DialogContent>
     </Dialog>

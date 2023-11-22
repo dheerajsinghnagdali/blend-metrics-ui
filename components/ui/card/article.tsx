@@ -32,6 +32,7 @@ interface ArticleProps
   asChild?: boolean;
   isGrabbed?: boolean;
   isOnCanvas?: boolean;
+  destructive?: boolean;
 }
 
 const [ArticleProvider, useArticleContext] = createContext<{
@@ -49,6 +50,7 @@ const Article = ({
   isGrabbed,
   isOnCanvas,
   asChild,
+  destructive,
   ...props
 }: ArticleProps) => {
   const Comp = asChild ? Slot : "div";
@@ -66,7 +68,9 @@ const Article = ({
               isGrabbed,
             "border-primary-500 ring-1 ring-primary-500 hover:border-primary-500 hover:ring-primary-500 min-w-[200px] max-w-[300px] shadow-[0px_1px_4px_0px_rgba(48,108,254,0.13)]":
               isSelected,
-            "min-w-[200px] max-w-[300px]": isOnCanvas
+            "min-w-[200px] max-w-[300px]": isOnCanvas,
+            "border-error-500 hover:border-error-500 min-w-[200px] max-w-[300px] shadow-[0px_1px_4px_0px_rgba(48,108,254,0.13)]":
+              destructive
           },
           className
         )}
@@ -87,6 +91,9 @@ const ArticleIconVariants = cva(
       visual: {
         default: "text-primary-500",
         flushed: ""
+      },
+      variant: {
+        destructive: "border border-error-200 text-error-500"
       }
     },
     defaultVariants: {
@@ -104,12 +111,13 @@ const ArticleIcon = ({
   className,
   rounded,
   visual,
+  variant,
   ...props
 }: ArticleIconProps) => {
   return (
     <div
       className={cn(
-        ArticleIconVariants({ className, rounded, visual }),
+        ArticleIconVariants({ className, rounded, visual, variant }),
         className
       )}
       {...props}

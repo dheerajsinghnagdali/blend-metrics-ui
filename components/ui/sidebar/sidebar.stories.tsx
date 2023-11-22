@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import {
   Aperture,
+  ArrowLeft,
   ArrowRight,
   BarChartSquare02,
   CheckCircle1,
@@ -10,6 +11,10 @@ import {
   ChevronUp,
   Clock1,
   CoinStack,
+  Copy,
+  Dataflow01,
+  Dataflow02,
+  Edit05,
   Folder,
   HelpCircle,
   HomeLine,
@@ -22,6 +27,7 @@ import {
   SearchMd,
   Settings01,
   ShieldZap,
+  Trash02,
   User,
   UserPlus,
   Users
@@ -31,8 +37,14 @@ import {
   GoogleBrand,
   SlackBrand
 } from "@blend-metrics/icons/brands";
-import { BlendMetrics } from "@blend-metrics/icons/special";
+import {
+  BlendMetrics,
+  GridVertical2,
+  GripVertical1
+} from "@blend-metrics/icons/special";
 import { Meta } from "@storybook/react";
+import { cn } from "@/lib/functions";
+import { useToggle } from "@/lib/hooks";
 import {
   Accordion,
   AccordionItem,
@@ -51,8 +63,10 @@ import {
   AvatarFallback,
   AvatarImage,
   Button,
+  ButtonGroup,
   DisclosureContent,
   DropdownMenu,
+  DropdownMenuCheckItem,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuLabel,
@@ -64,8 +78,12 @@ import {
   Label,
   Listbox,
   ListboxButton,
+  ListboxContent,
+  ListboxLabel,
   ListboxOption,
   ListboxOptions,
+  PercentageInput,
+  Progress,
   RadioGroup,
   RadioGroupItemSelector,
   RoundedButton,
@@ -74,6 +92,11 @@ import {
   SearchField,
   SearchFieldButton,
   SearchFieldInput,
+  SliderRange,
+  SliderRoot,
+  SliderThumb,
+  SliderTrack,
+  Switch,
   Tabs,
   TabsContent,
   TabsList,
@@ -1529,6 +1552,453 @@ export const CommandVariant = () => {
           </ScrollArea>
         </div>
       </div>
+    </div>
+  );
+};
+
+export const SlitPathVariant = () => {
+  const [selected, setSelected] = useState<string>();
+  const [value, setValue] = React.useState<number>(0);
+  const [isOpen, { toggle }] = useToggle();
+
+  return (
+    <div className="h-screen relative w-[386px] border-l border-gray-200 bg-white shadow-[0px_4px_30px_0px_rgba(0,0,0,0.05)]">
+      <div className="p-5">
+        <div className="h-12 flex items-center gap-x-[15px]">
+          <div className="h-12 w-12 rounded-lg inline-flex items-center justify-center flex-none border-[1.5px] border-gray-200">
+            <Dataflow02 className="h-6 w-6 text-primary-500" />
+          </div>
+          <div>
+            <h2 className="text-base font-medium text-gray-900">Split Path</h2>
+            <p className="text-xs text-gray-500 leading-[14.52px]">
+              Condition or percentage based split
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <RoundedButton
+        size="sm"
+        variant="secondary"
+        className="absolute top-[72px] -left-4"
+      >
+        <ChevronRight className="h-4 w-4" />
+      </RoundedButton>
+
+      <Tabs className="h-[calc(theme(height.full)-88px)]" defaultValue="Setup">
+        <TabsList
+          className={cn(
+            "grid h-11 border-t grid-cols-2",
+            selected === "conditional-split" && "grid-cols-3"
+          )}
+        >
+          <TabsTrigger value="Setup">Setup</TabsTrigger>
+          {selected === "conditional-split" && (
+            <TabsTrigger value="Conditions">Conditions</TabsTrigger>
+          )}
+          <TabsTrigger value="Test">Test</TabsTrigger>
+        </TabsList>
+        <TabsContent
+          className="h-[calc(theme(height.full)-theme(height.11))] px-5 pt-5"
+          value="Setup"
+        >
+          <RadioGroup
+            className="gap-y-2"
+            value={selected}
+            onValueChange={setSelected}
+          >
+            <RadioGroupItemSelector value="conditional-split">
+              <Label asChild>
+                <span>Conditional Split</span>
+              </Label>
+              <HelperText>Conditional Split</HelperText>
+            </RadioGroupItemSelector>
+            <RadioGroupItemSelector value="percentage-based-split">
+              <Label asChild>
+                <span>Percentage based split</span>
+              </Label>
+              <HelperText>Percentage based split</HelperText>
+            </RadioGroupItemSelector>
+          </RadioGroup>
+
+          {selected === "conditional-split" && (
+            <>
+              <div className="mt-6 pb-5 space-y-3">
+                <h2 className="text-sm font-medium text-gray-900">Paths</h2>
+
+                <div className="space-y-1.5">
+                  <h3 className="text-sm font-medium text-gray-900">
+                    First Check
+                  </h3>
+
+                  <article className="group relative py-3 flex items-center px-[25px] gap-x-1 h-[68px] rounded-lg border-2 border-gray-200 bg-white shadow-[0px_1px_5px_0px_rgba(16,24,40,0.02)]">
+                    <button className="focus-visible:outline-none cursor-grab absolute left-1 inset-y-0 my-auto">
+                      <GripVertical1 className="group-hover:opacity-100 opacity-0 transition duration-300 text-gray-400" />
+                    </button>
+                    <div className="flex-grow">
+                      <h1 className="text-sm leading-6 font-semibold text-gray-black">
+                        Path1
+                      </h1>
+                      <p className="text-xs leading-5 text-primary-500">
+                        Add Condition
+                      </p>
+                    </div>
+
+                    <div className="flex items center">
+                      <ButtonGroup className="inline-flex opacity-0 group-hover:opacity-100 transition duration-300 items-center gap-x-1">
+                        <TooltipProvider delayDuration={75}>
+                          <Tooltip>
+                            <TooltipTrigger className="focus:outline-none">
+                              <ArrowLeft className="h-3 w-3 text-gray-500" />
+                            </TooltipTrigger>
+                            <TooltipContent
+                              className="font-semibold"
+                              side="top"
+                            >
+                              Move Left
+                            </TooltipContent>
+                          </Tooltip>
+                        </TooltipProvider>
+                        <TooltipProvider delayDuration={75}>
+                          <Tooltip>
+                            <TooltipTrigger className="focus:outline-none">
+                              <ArrowRight className="h-3 w-3 text-gray-500" />
+                            </TooltipTrigger>
+                            <TooltipContent
+                              className="font-semibold"
+                              side="top"
+                            >
+                              Move Right
+                            </TooltipContent>
+                          </Tooltip>
+                        </TooltipProvider>
+
+                        <DropdownMenu>
+                          <DropdownMenuTrigger className="focus:outline-none">
+                            <Copy className="h-3 w-3 text-gray-500" />
+                          </DropdownMenuTrigger>
+                          <DropdownMenuContent align="start">
+                            <DropdownMenuCheckItem>Copy</DropdownMenuCheckItem>
+                            <DropdownMenuCheckItem>
+                              Duplicate
+                            </DropdownMenuCheckItem>
+                          </DropdownMenuContent>
+                        </DropdownMenu>
+
+                        <TooltipProvider delayDuration={75}>
+                          <Tooltip>
+                            <TooltipTrigger className="focus:outline-none">
+                              <Trash02 className="h-3 w-3 text-error-500" />
+                            </TooltipTrigger>
+                            <TooltipContent
+                              className="font-semibold"
+                              side="top"
+                            >
+                              Delete Path
+                            </TooltipContent>
+                          </Tooltip>
+                        </TooltipProvider>
+                      </ButtonGroup>
+
+                      <button className="focus-visible:outline-none h-[18px] w-[18px]">
+                        <ChevronRight className="h-[18px] text-gray-400 w-[18px]" />
+                      </button>
+                    </div>
+                  </article>
+                </div>
+
+                <div className="space-y-1.5">
+                  <h3 className="text-sm font-medium text-gray-900">
+                    Then Check
+                  </h3>
+
+                  <article className="group relative py-3 flex items-center px-[25px] gap-x-1 h-[68px] rounded-lg border-2 border-gray-200 bg-white shadow-[0px_1px_5px_0px_rgba(16,24,40,0.02)]">
+                    <button className="focus-visible:outline-none cursor-grab absolute left-1 inset-y-0 my-auto">
+                      <GripVertical1 className="group-hover:opacity-100 opacity-0 transition duration-300 text-gray-400" />
+                    </button>
+                    <div className="flex-grow">
+                      <h1 className="text-sm leading-6 font-semibold text-gray-black">
+                        Path2
+                      </h1>
+                      <p className="text-xs leading-5 text-primary-500">
+                        Add Condition
+                      </p>
+                    </div>
+
+                    <div className="flex items center">
+                      <ButtonGroup className="inline-flex opacity-0 group-hover:opacity-100 transition duration-300 items-center gap-x-1">
+                        <TooltipProvider delayDuration={75}>
+                          <Tooltip>
+                            <TooltipTrigger className="focus:outline-none">
+                              <ArrowLeft className="h-3 w-3 text-gray-500" />
+                            </TooltipTrigger>
+                            <TooltipContent
+                              className="font-semibold"
+                              side="top"
+                            >
+                              Move Left
+                            </TooltipContent>
+                          </Tooltip>
+                        </TooltipProvider>
+                        <TooltipProvider delayDuration={75}>
+                          <Tooltip>
+                            <TooltipTrigger className="focus:outline-none">
+                              <ArrowRight className="h-3 w-3 text-gray-500" />
+                            </TooltipTrigger>
+                            <TooltipContent
+                              className="font-semibold"
+                              side="top"
+                            >
+                              Move Right
+                            </TooltipContent>
+                          </Tooltip>
+                        </TooltipProvider>
+
+                        <DropdownMenu>
+                          <DropdownMenuTrigger className="focus:outline-none">
+                            <Copy className="h-3 w-3 text-gray-500" />
+                          </DropdownMenuTrigger>
+                          <DropdownMenuContent align="start">
+                            <DropdownMenuCheckItem>Copy</DropdownMenuCheckItem>
+                            <DropdownMenuCheckItem>
+                              Duplicate
+                            </DropdownMenuCheckItem>
+                          </DropdownMenuContent>
+                        </DropdownMenu>
+
+                        <TooltipProvider delayDuration={75}>
+                          <Tooltip>
+                            <TooltipTrigger className="focus:outline-none">
+                              <Trash02 className="h-3 w-3 text-error-500" />
+                            </TooltipTrigger>
+                            <TooltipContent
+                              className="font-semibold"
+                              side="top"
+                            >
+                              Delete Path
+                            </TooltipContent>
+                          </Tooltip>
+                        </TooltipProvider>
+                      </ButtonGroup>
+
+                      <button className="focus-visible:outline-none h-[18px] w-[18px]">
+                        <ChevronRight className="h-[18px] text-gray-400 w-[18px]" />
+                      </button>
+                    </div>
+                  </article>
+                </div>
+
+                <Button variant="ghost">
+                  <Plus className="h-[15px] w-[15]" />
+                  Add Path
+                </Button>
+              </div>
+
+              <div className="mt-6 flex items-center justify-between">
+                <div className="inline-flex items-center gap-x-2">
+                  <span className="font-medium text-sm text-gray-700">
+                    Single Endpoint
+                  </span>
+                  <TooltipProvider>
+                    <Tooltip>
+                      <TooltipTrigger className="focus-visible:outline-none">
+                        <HelpCircle className="flex-none text-gray-500 h-4 w-4" />
+                      </TooltipTrigger>
+                      <TooltipContent
+                        className="font-semibold"
+                        side="bottom"
+                        sideOffset={20}
+                      >
+                        Merge paths to a single endpoint
+                      </TooltipContent>
+                    </Tooltip>
+                  </TooltipProvider>
+                </div>
+
+                <Switch />
+              </div>
+            </>
+          )}
+
+          {selected === "percentage-based-split" && (
+            <>
+              <div className="mt-6 space-y-3">
+                <div className="space-y-3">
+                  <div className="items-center justify-between flex">
+                    <span className="text-sm font-medium text-gray-900">
+                      Paths
+                    </span>
+                    <Button variant="link" onClick={toggle}>
+                      {isOpen ? "Switch to Auto" : "Switch to Manual"}
+                    </Button>
+                  </div>
+
+                  {isOpen && (
+                    <div className="flex justify-between items-center">
+                      <Progress
+                        className="w-[260px]"
+                        indicatorClassName="bg-success-500"
+                        value={100}
+                      />
+                      <span className="text-sm font-medium text-gray-700">
+                        100%
+                      </span>
+                    </div>
+                  )}
+                </div>
+
+                <div className="group h-[92px] rounded-lg border-gray-200 border p-3 relative pl-[25px]">
+                  <button className="focus-visible:outline-none opacity-0 group-hover:opacity-100 duration-300 absolute left-2 inset-y-0 cursor-grab my-auto">
+                    <GridVertical2 className="text-gray-400" />
+                  </button>
+
+                  <div className="flex items-center justify-between">
+                    <span className="text-sm font-semibold leading-6 text-gray-black">
+                      Path 1
+                    </span>
+
+                    <ButtonGroup className="inline-flex opacity-0 transition group-hover:opacity-100 duration-300 items-center gap-x-1">
+                      <TooltipProvider delayDuration={75}>
+                        <Tooltip>
+                          <TooltipTrigger className="focus:outline-none">
+                            <ArrowLeft className="h-3 w-3 text-gray-500" />
+                          </TooltipTrigger>
+                          <TooltipContent className="font-semibold" side="top">
+                            Move Left
+                          </TooltipContent>
+                        </Tooltip>
+                      </TooltipProvider>
+
+                      <TooltipProvider delayDuration={75}>
+                        <Tooltip>
+                          <TooltipTrigger className="focus:outline-none">
+                            <ArrowRight className="h-3 w-3 text-gray-500" />
+                          </TooltipTrigger>
+                          <TooltipContent className="font-semibold" side="top">
+                            Move Right
+                          </TooltipContent>
+                        </Tooltip>
+                      </TooltipProvider>
+
+                      <DropdownMenu>
+                        <DropdownMenuTrigger className="focus:outline-none">
+                          <Copy className="h-3 w-3 text-gray-500" />
+                        </DropdownMenuTrigger>
+                        <DropdownMenuContent align="start">
+                          <DropdownMenuCheckItem>Copy</DropdownMenuCheckItem>
+                          <DropdownMenuCheckItem>
+                            Duplicate
+                          </DropdownMenuCheckItem>
+                        </DropdownMenuContent>
+                      </DropdownMenu>
+
+                      <TooltipProvider delayDuration={75}>
+                        <Tooltip>
+                          <TooltipTrigger className="focus:outline-none">
+                            <Trash02 className="h-3 w-3 text-error-500" />
+                          </TooltipTrigger>
+                          <TooltipContent className="font-semibold" side="top">
+                            Delete Path
+                          </TooltipContent>
+                        </Tooltip>
+                      </TooltipProvider>
+                    </ButtonGroup>
+                  </div>
+
+                  <div className="flex items-center gap-x-[17px]">
+                    <SliderRoot
+                      value={[value]}
+                      onValueChange={([value]) => setValue(value)}
+                      className="flex-grow"
+                    >
+                      <SliderTrack>
+                        <SliderRange />
+                      </SliderTrack>
+                      <SliderThumb />
+                    </SliderRoot>
+                    <div className="flex items-center gap-x-1.5">
+                      <PercentageInput
+                        className="w-[86px]"
+                        value={value}
+                        onValueChange={setValue}
+                      />
+                      <span className="text-sm leading-5 text-gray-700 font-medium">
+                        %
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="flex mt-5 items-center justify-between">
+                <Button variant="ghost">
+                  <Plus className="h-[15px] w-[15px]" />
+                  Add Path
+                </Button>
+
+                <Button
+                  className="h-9 py-2 px-3.5 text-gray-800"
+                  variant="link"
+                >
+                  Distribute Evenly
+                </Button>
+              </div>
+
+              <div className="mt-6 flex items-center justify-between">
+                <div className="inline-flex items-center gap-x-2">
+                  <span className="font-medium text-sm text-gray-700">
+                    Single Endpoint
+                  </span>
+                  <TooltipProvider>
+                    <Tooltip>
+                      <TooltipTrigger className="focus-visible:outline-none">
+                        <HelpCircle className="flex-none text-gray-500 h-4 w-4" />
+                      </TooltipTrigger>
+                      <TooltipContent
+                        className="font-semibold"
+                        side="bottom"
+                        sideOffset={20}
+                      >
+                        Merge paths to a single endpoint
+                      </TooltipContent>
+                    </Tooltip>
+                  </TooltipProvider>
+                </div>
+
+                <Switch />
+              </div>
+            </>
+          )}
+        </TabsContent>
+        <TabsContent
+          className="h-[calc(theme(height.full)-theme(height.11))]"
+          value="Conditions"
+        >
+          <div className="p-5">
+            <Listbox>
+              <ListboxLabel className="text-gray-700">
+                Selected Path
+              </ListboxLabel>
+              <ListboxContent className="mt-1.5">
+                <div className="items-center flex gap-x-2.5">
+                  <ListboxButton className="flex-grow" />
+                  <button className="focus-visible:outline-none">
+                    <Edit05 className="h-[18px] w-[18px] text-gray-400" />
+                  </button>
+                </div>
+                <ListboxOptions className="w-[calc(theme(width.full)-theme(width.6))]">
+                  <ListboxOption value="Path 1">Path 1</ListboxOption>
+                  <ListboxOption value="Path 2">Path 2</ListboxOption>
+                </ListboxOptions>
+              </ListboxContent>
+            </Listbox>
+          </div>
+        </TabsContent>
+        <TabsContent
+          className="h-[calc(theme(height.full)-theme(height.11))]"
+          value="Test"
+        />
+      </Tabs>
     </div>
   );
 };

@@ -2,22 +2,22 @@
 
 import * as React from "react";
 import { ChevronDown, ChevronUp } from "@blend-metrics/icons";
-import * as numberInput from "@zag-js/number-input";
+import * as percentageInput from "@zag-js/number-input";
 import { normalizeProps, useMachine } from "@zag-js/react";
 import { cn, toString } from "@/lib/functions";
 import { WithoutRef } from "@/types/react";
 import { Input, InputRightElement } from "../input";
 import { InputGroup } from "../input-group";
 
-export function NumberInput({
+export function PercentageInput({
   onValueChange,
   value,
   header,
-  max,
-  min,
+  max = 100,
+  min = 0,
   placeholder,
-  groupClassName,
-  className
+  className,
+  groupClassName
 }: {
   onValueChange?: (value: number) => void;
   value?: number;
@@ -36,7 +36,7 @@ export function NumberInput({
   className?: string;
 }) {
   const [state, send] = useMachine(
-    numberInput.machine({ id: React.useId(), min, max }),
+    percentageInput.machine({ id: React.useId(), min, max }),
     {
       context: {
         value: toString(value),
@@ -48,29 +48,32 @@ export function NumberInput({
     }
   );
 
-  const api = numberInput.connect(state, send, normalizeProps);
+  const api = percentageInput.connect(state, send, normalizeProps);
 
   return (
     <>
       {header?.(api.labelProps)}
-      <InputGroup className={groupClassName} {...api.rootProps}>
+      <InputGroup className={cn("group", groupClassName)} {...api.rootProps}>
         <Input
-          className={cn("pr-7", className)}
+          className={cn(
+            "pr-5 focus:ring-0 text-gray-500 focus:border-gray-300",
+            className
+          )}
           placeholder={placeholder}
           {...api.inputProps}
         />
-        <InputRightElement className="inset-y-0.5 w-7 flex-col justify-between">
+        <InputRightElement className="inset-y-0 w-5 flex-col justify-center group-hover:visible invisible items-start">
           <button
-            className="flex-none rounded-sm bg-gray-100 px-1.5 py-1 focus-visible:outline-none"
+            className="flex-none focus-visible:outline-none"
             {...api.decrementTriggerProps}
           >
-            <ChevronDown className="h-2.5 w-2.5 text-gray-500" />
+            <ChevronUp className="h-3.5 w-3.5 text-gray-400" />
           </button>
           <button
-            className="flex-none rounded-sm bg-gray-100 px-1.5 py-1 focus-visible:outline-none"
+            className="flex-none focus-visible:outline-none"
             {...api.incrementTriggerProps}
           >
-            <ChevronUp className="h-2.5 w-2.5 text-gray-500" />
+            <ChevronDown className="h-3.5 w-3.5 text-gray-400" />
           </button>
         </InputRightElement>
       </InputGroup>

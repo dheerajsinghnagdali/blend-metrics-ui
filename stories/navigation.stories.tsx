@@ -560,3 +560,25 @@ export const InviteUsers = () => {
     </nav>
   );
 };
+
+export const RestoreVersionVariant = () => {
+  return (
+    <nav className="px-[17px] h-[70px] flex border-b bg-white border-gray-200 items-center justify-between">
+      <div>
+        <h1 className="text-base text-gray-900 leading-5 font-medium">
+          New Team Version
+        </h1>
+        <p className="text-sm leading-6 text-gray-500">
+          Jun 19, 2023 at 11:48 AM
+        </p>
+      </div>
+
+      <div className="flex items-center gap-x-3">
+        <Button>Restore this version</Button>
+        <Button variant="outlined" visual="gray">
+          Go Back to Current Version
+        </Button>
+      </div>
+    </nav>
+  );
+};

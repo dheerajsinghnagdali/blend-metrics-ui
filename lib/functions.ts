@@ -153,25 +153,6 @@ export function get2DArray<T extends any[]>(arr: T, size = 2): T[] {
   return recursion(arr, size);
 }
 
-export function chunk<T extends unknown[]>(arr: T, size = 2): T[] {
-  const recursion = (arr: T, size: number, result = [] as T[]): T[] => {
-    if (size >= arr.length) {
-      return [...result, [...arr]] as T[];
-    }
-
-    const remainArr = arr.slice(size);
-    const sliced = arr.slice(0, size);
-
-    return recursion(remainArr as T, size, [...result, sliced] as T[]);
-  };
-
-  if (isEmpty(arr) || size < 1) {
-    return [] as T[];
-  }
-
-  return recursion(arr, size);
-}
-
 export function add(...nums: number[]): number {
   function recursion(nums: number[], left = 0, result = 0): number {
     if (nums.length === left) {

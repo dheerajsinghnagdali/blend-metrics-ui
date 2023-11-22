@@ -146,7 +146,7 @@ export const ListboxButton = ({
 
 interface ListboxOptions
   extends WithoutChildren<React.HTMLAttributes<HTMLUListElement>> {
-  children:
+  children?:
     | React.ReactNode
     | ((bag: {
         open: boolean;

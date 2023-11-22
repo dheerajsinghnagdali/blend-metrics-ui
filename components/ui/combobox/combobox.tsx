@@ -19,7 +19,7 @@ interface ComboboxLabelProps
 }
 
 const ComboboxLabel = React.forwardRef<HTMLLabelElement, ComboboxLabelProps>(
-  ({ className, size, children, ...props }, ref) => {
+  ({ className, size, ...props }, ref) => {
     return (
       <ComboboxPrimitive.Label
         className={cn(labelVariants({ className, size }))}

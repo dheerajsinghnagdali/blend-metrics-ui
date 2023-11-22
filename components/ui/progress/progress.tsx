@@ -21,59 +21,68 @@ const Progress = React.forwardRef<
   React.ComponentPropsWithoutRef<typeof ProgressPrimitive.Root> & {
     value?: number;
     bubble?: boolean;
+    indicatorClassName?: string;
   }
->(({ className, value = 0, bubble = true, ...props }, ref) => {
-  const indicatorRef =
-    React.useRef<React.ElementRef<typeof ProgressPrimitive.Indicator>>(null);
-  const contentRef =
-    React.useRef<React.ElementRef<typeof TooltipContent>>(null);
-  const [alignOffset, setAlignOffset] = React.useState<number>();
+>(
+  (
+    { className, value = 0, bubble = true, indicatorClassName, ...props },
+    ref
+  ) => {
+    const indicatorRef =
+      React.useRef<React.ElementRef<typeof ProgressPrimitive.Indicator>>(null);
+    const contentRef =
+      React.useRef<React.ElementRef<typeof TooltipContent>>(null);
+    const [alignOffset, setAlignOffset] = React.useState<number>();
 
-  useIsomorphicLayoutEffect(() => {
-    const indicator = indicatorRef.current;
+    useIsomorphicLayoutEffect(() => {
+      const indicator = indicatorRef.current;
 
-    if (!indicator) return;
+      if (!indicator) return;
 
-    const { width } = getSize(indicator);
-    const offset = computePercentage(width, value);
-    setAlignOffset(offset);
-  }, [value]);
+      const { width } = getSize(indicator);
+      const offset = computePercentage(width, value);
+      setAlignOffset(offset);
+    }, [value]);
 
-  return (
-    <TooltipProvider>
-      <Tooltip>
-        <TooltipTrigger asChild>
-          <ProgressPrimitive.Root
-            ref={ref}
+    return (
+      <TooltipProvider>
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <ProgressPrimitive.Root
+              ref={ref}
+              className={cn(
+                "relative h-2 w-full overflow-hidden rounded-full bg-gray-100",
+                className
+              )}
+              {...props}
+            >
+              <ProgressPrimitive.Indicator
+                className={cn(
+                  "h-full w-full flex-1 rounded-r-full bg-primary-500 transition-all duration-500",
+                  indicatorClassName
+                )}
+                style={{ transform: `translateX(-${100 - value}%)` }}
+                ref={indicatorRef}
+              />
+            </ProgressPrimitive.Root>
+          </TooltipTrigger>
+          <TooltipContent
+            ref={contentRef}
             className={cn(
-              "relative h-2 w-full overflow-hidden rounded-full bg-gray-100",
-              className
+              "relative overflow-visible px-3 py-2 text-xs font-semibold leading-[18px] shadow-lg after:absolute after:inset-x-0 after:-bottom-1 after:mx-auto after:h-3 after:w-3 after:-rotate-45 after:rounded-[1.5px] after:bg-white",
+              bubble ? "after:content-['']" : "after:content-none"
             )}
-            {...props}
+            alignOffset={alignOffset}
+            visual="white"
+            align="start"
           >
-            <ProgressPrimitive.Indicator
-              className="h-full w-full flex-1 rounded-r-full bg-primary-500 transition-all duration-500"
-              style={{ transform: `translateX(-${100 - value}%)` }}
-              ref={indicatorRef}
-            />
-          </ProgressPrimitive.Root>
-        </TooltipTrigger>
-        <TooltipContent
-          ref={contentRef}
-          className={cn(
-            "relative overflow-visible px-3 py-2 text-xs font-semibold leading-[18px] shadow-lg after:absolute after:inset-x-0 after:-bottom-1 after:mx-auto after:h-3 after:w-3 after:-rotate-45 after:rounded-[1.5px] after:bg-white",
-            bubble ? "after:content-['']" : "after:content-none"
-          )}
-          alignOffset={alignOffset}
-          visual="white"
-          align="start"
-        >
-          {value}%
-        </TooltipContent>
-      </Tooltip>
-    </TooltipProvider>
-  );
-});
+            {value}%
+          </TooltipContent>
+        </Tooltip>
+      </TooltipProvider>
+    );
+  }
+);
 Progress.displayName = ProgressPrimitive.Root.displayName;
 
 interface CircularProgressProps extends React.HTMLAttributes<HTMLDivElement> {
