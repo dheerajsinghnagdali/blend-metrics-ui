@@ -1,5 +1,11 @@
 # @blend-metrics/ui
 
+## 0.8.0
+
+### Minor Changes
+
+- Arrow component has connects two DOM elements together with the help of a cubic curve
+
 ## 0.7.2
 
 ### Patch Changes
