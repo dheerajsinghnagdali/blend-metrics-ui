@@ -2,12 +2,8 @@
 
 import * as React from "react";
 import * as ProgressPrimitive from "@radix-ui/react-progress";
-import {
-  cn,
-  computeCircumference,
-  computePercentage,
-  getSize
-} from "@/lib/functions";
+import { getSize } from "@/lib/dom-utils";
+import { cn, computeCircumference, computePercentage } from "@/lib/functions";
 import { useIsomorphicLayoutEffect } from "@/lib/hooks";
 import {
   Tooltip,

@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { addEvent } from "./dom-utils";
+import { addEvent, getSize, isElement } from "./dom-utils";
 import { debounce } from "./functions";
 
 export function useDebounce<TValue>(value: TValue, wait?: number) {
@@ -222,4 +222,45 @@ export const useArray = <T>(defaultState?: T[]) => {
   const clear = React.useCallback(() => setState(undefined), []);
 
   return [state, { remove, prepend, append, patch: setState, clear }] as const;
+};
+
+export const useSize = <T extends Element>() => {
+  const ref = React.useRef<T>(null);
+  const [size, setSize] = React.useState({ width: 0, height: 0 });
+
+  useIsomorphicLayoutEffect(() => {
+    const element = ref.current;
+
+    if (!element) return;
+
+    const size = getSize(element);
+    setSize(size);
+
+    const observer = new MutationObserver((mutations) =>
+      mutations.forEach((mutation) => {
+        const element = mutation.target;
+
+        if (!isElement(element)) return;
+
+        const size = getSize(element);
+        setSize(size);
+      })
+    );
+
+    observer.observe(element, { attributes: true });
+
+    return () => observer.disconnect();
+  }, []);
+
+  return [ref, size] as const;
+};
+
+export const usePrevious = <T>(value: T) => {
+  const previous = React.useRef(value);
+
+  React.useEffect(() => {
+    previous.current = value;
+  });
+
+  return previous;
 };

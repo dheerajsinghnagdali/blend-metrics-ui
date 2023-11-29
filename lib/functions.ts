@@ -1,13 +1,9 @@
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
+import { Point } from "@/types/dom-utils";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
-}
-
-export function getSize<TElement extends Element>(element: TElement) {
-  const { width, height } = element.getBoundingClientRect();
-  return { width, height };
 }
 
 export function computePercentage(value: number, percentage: number) {
@@ -265,3 +261,19 @@ export function toString(value?: number): undefined | string {
 
   return `${value}`;
 }
+
+export const min = (...values: number[]) => {
+  return Math.min(...values);
+};
+
+export const abs = (value: number) => {
+  return Math.abs(value);
+};
+
+export const max = (...values: number[]) => {
+  return Math.max(...values);
+};
+
+export const toNumber = (value: any): number => {
+  return Number(value);
+};
