@@ -209,6 +209,27 @@ const DropdownMenuRadioItem = React.forwardRef<
 ));
 DropdownMenuRadioItem.displayName = DropdownMenuPrimitive.RadioItem.displayName;
 
+const DropdownMenuRadioCheckItem = React.forwardRef<
+  React.ElementRef<typeof DropdownMenuPrimitive.RadioItem>,
+  React.ComponentPropsWithoutRef<typeof DropdownMenuPrimitive.RadioItem>
+>(({ children, className, ...props }, ref) => (
+  <DropdownMenuPrimitive.RadioItem
+    ref={ref}
+    className={cn(
+      "group relative flex cursor-pointer select-none items-center py-3 pl-3 pr-7 text-[13px] font-medium leading-[13.3px] text-gray-500 outline-none transition-colors data-[disabled]:pointer-events-none data-[disabled]:opacity-50 hover:bg-gray-50 hover:text-gray-black focus:bg-gray-100 focus:text-gray-black",
+      className
+    )}
+    {...props}
+  >
+    {children}
+    <DropdownMenuPrimitive.ItemIndicator>
+      <Check className="h-4 w-4 flex-none absolute top-1/2 text-primary-500 -translate-y-1/2 right-3" />
+    </DropdownMenuPrimitive.ItemIndicator>
+  </DropdownMenuPrimitive.RadioItem>
+));
+
+DropdownMenuRadioCheckItem.displayName = "DropdownMenuRadioCheckItem";
+
 const dropdownMenuLabelVariants = cva("text-sm font-semibold", {
   variants: {
     size: {
@@ -282,5 +303,6 @@ export {
   DropdownMenuSub,
   DropdownMenuSubContent,
   DropdownMenuSubTrigger,
-  DropdownMenuRadioGroup
+  DropdownMenuRadioGroup,
+  DropdownMenuRadioCheckItem
 };

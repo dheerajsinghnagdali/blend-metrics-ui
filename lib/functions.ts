@@ -173,6 +173,7 @@ export function debounce(cb: () => void, wait?: number) {
     cb,
     wait
   );
+  clearTimeout(timeoutId);
 
   function cancel() {
     clearTimeout(timeoutId);
