@@ -17,7 +17,7 @@ import { normalizeProps, useMachine } from "@zag-js/react";
 import * as tagsInput from "@zag-js/tags-input";
 import { flushSync } from "react-dom";
 import { z } from "zod";
-import { callAll, cn } from "@/lib/functions";
+import { callAll, cn, isNotEmpty } from "@/lib/functions";
 import { useToggle } from "@/lib/hooks";
 import {
   Badge,
@@ -292,7 +292,7 @@ export function Default() {
         />
       )}
 
-      {selected && (
+      {selected && isNotEmpty(selected) && (
         <div className="mt-6 space-y-3">
           <span className="text-base leading-5 font-medium text-gray-700">
             Invites
