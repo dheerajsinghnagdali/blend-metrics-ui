@@ -1,5 +1,11 @@
 # @blend-metrics/ui
 
+## 0.8.1
+
+### Patch Changes
+
+- Export Sidebar components from the library
+
 ## 0.8.0
 
 ### Minor Changes
