@@ -1,5 +1,11 @@
 # @blend-metrics/ui
 
+## 0.8.2
+
+### Patch Changes
+
+- DropdownMenuRadioCheckItem
+
 ## 0.8.1
 
 ### Patch Changes
