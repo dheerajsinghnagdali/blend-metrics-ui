@@ -1,5 +1,11 @@
 # @blend-metrics/ui
 
+## 0.9.0
+
+### Minor Changes
+
+- Include build folder in the production build
+
 ## 0.8.2
 
 ### Patch Changes
