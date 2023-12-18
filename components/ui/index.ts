@@ -54,3 +54,4 @@ export * from "./percentage-input";
 export * from "./slider";
 export * from "./editable";
 export * from "./arrow";
+export * from "./sidebar";
